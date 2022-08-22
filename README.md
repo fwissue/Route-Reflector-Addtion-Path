@@ -4,4 +4,4 @@ in iBGP route-reflector will only advertise best route in normal situation, RFC 
 <br /> 
 For fast converge, need to enable ip bgp fast-external-fallover permit on bgp link between R2<->R5 and R1<->R5
 
-https://github.com/fwissue/Route-Reflector-Addtion-Path/blob/main/rr-addition%20path.drawio.pdf
+
