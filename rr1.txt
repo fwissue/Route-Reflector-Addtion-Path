@@ -1,0 +1,181 @@
+Building configuration...
+
+Current configuration : 4295 bytes
+!
+! Last configuration change at 01:18:30 UTC Mon Aug 22 2022
+!
+version 15.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R11
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+template peer-policy
+!
+!
+!
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 11.11.11.11 255.255.255.255
+!
+interface GigabitEthernet0/0
+ ip address 10.11.22.11 255.255.255.0
+ ip ospf network point-to-point
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/1
+ ip address 10.11.3.11 255.255.255.0
+ ip ospf network point-to-point
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/2
+ ip address 10.11.2.11 255.255.255.0
+ ip ospf network point-to-point
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/3
+ ip address 10.11.1.11 255.255.255.0
+ ip ospf network point-to-point
+ duplex auto
+ speed auto
+ media-type rj45
+!
+router ospf 1
+ router-id 11.11.11.11
+ network 10.11.11.11 0.0.0.0 area 0
+ network 10.11.0.0 0.0.255.255 area 0
+ network 11.11.11.11 0.0.0.0 area 0
+!
+router bgp 65000
+ bgp router-id 11.11.11.11
+ bgp cluster-id 11.11.11.11
+ bgp log-neighbor-changes
+ neighbor 1.1.1.1 remote-as 65000
+ neighbor 1.1.1.1 update-source Loopback0
+ neighbor 2.2.2.2 remote-as 65000
+ neighbor 2.2.2.2 update-source Loopback0
+ neighbor 3.3.3.3 remote-as 65000
+ neighbor 3.3.3.3 update-source Loopback0
+ neighbor 22.22.22.22 remote-as 65000
+ neighbor 22.22.22.22 update-source Loopback0
+ !
+ address-family ipv4
+  bgp additional-paths select all
+  bgp additional-paths send receive
+  neighbor 1.1.1.1 activate
+  neighbor 1.1.1.1 route-reflector-client
+  neighbor 1.1.1.1 advertise additional-paths all
+  neighbor 2.2.2.2 activate
+  neighbor 2.2.2.2 route-reflector-client
+  neighbor 2.2.2.2 advertise additional-paths all
+  neighbor 3.3.3.3 activate
+  neighbor 3.3.3.3 route-reflector-client
+  neighbor 3.3.3.3 advertise additional-paths all
+  neighbor 22.22.22.22 activate
+ exit-address-family
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+banner exec ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner incoming ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner login ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+!
+line con 0
+ exec-timeout 0 0
+line aux 0
+line vty 0 4
+ login
+ transport input none
+!
+no scheduler allocate
+!
+end
