@@ -1,0 +1,50 @@
+R3#show ip route bgp
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is not set
+
+      100.0.0.0/24 is subnetted, 1 subnets
+B        100.0.0.0 [200/5] via 10.2.5.5, 00:06:00
+                   [200/5] via 10.1.5.5, 00:06:00
+R3#
+
+R3#show ip bgp 100.0.0.0/24
+BGP routing table entry for 100.0.0.0/24, version 7
+Paths: (4 available, best #4, table default)
+Multipath: eBGP iBGP
+  Not advertised to any peer
+  Refresh Epoch 2
+  65001
+    10.2.5.5 (metric 3) from 22.22.22.22 (22.22.22.22)
+      Origin incomplete, metric 5, localpref 100, valid, internal
+      Originator: 2.2.2.2, Cluster list: 22.22.22.22
+      rx pathid: 0x1, tx pathid: 0
+  Refresh Epoch 2
+  65001
+    10.2.5.5 (metric 3) from 11.11.11.11 (11.11.11.11)
+      Origin incomplete, metric 5, localpref 100, valid, internal, multipath(oldest)
+      Originator: 2.2.2.2, Cluster list: 11.11.11.11
+      rx pathid: 0x1, tx pathid: 0
+  Refresh Epoch 2
+  65001
+    10.1.5.5 (metric 3) from 22.22.22.22 (22.22.22.22)
+      Origin incomplete, metric 5, localpref 100, valid, internal
+      Originator: 1.1.1.1, Cluster list: 22.22.22.22
+      rx pathid: 0x0, tx pathid: 0
+  Refresh Epoch 2
+  65001
+    10.1.5.5 (metric 3) from 11.11.11.11 (11.11.11.11)
+      Origin incomplete, metric 5, localpref 100, valid, internal, multipath, best
+      Originator: 1.1.1.1, Cluster list: 11.11.11.11
+      rx pathid: 0x0, tx pathid: 0x0
+R3#
+
+

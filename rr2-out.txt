@@ -1,0 +1,25 @@
+R22#show ip bgp 100.0.0.0/24
+BGP routing table entry for 100.0.0.0/24, version 31
+Paths: (3 available, best #1, table default)
+  Path advertised to update-groups:
+     1          2         
+  Refresh Epoch 2
+  65001, (Received from a RR-client)
+    10.1.5.5 (metric 2) from 1.1.1.1 (1.1.1.1)
+      Origin incomplete, metric 5, localpref 100, valid, internal, best
+      rx pathid: 0x0, tx pathid: 0x0
+  Path not advertised to any peer
+  Refresh Epoch 1
+  65001
+    10.1.5.5 (metric 2) from 11.11.11.11 (11.11.11.11)
+      Origin incomplete, metric 5, localpref 100, valid, internal
+      Originator: 1.1.1.1, Cluster list: 11.11.11.11
+      rx pathid: 0x0, tx pathid: 0
+  Path advertised to update-groups:
+     1         
+  Refresh Epoch 2
+  65001, (Received from a RR-client)
+    10.2.5.5 (metric 2) from 2.2.2.2 (2.2.2.2)
+      Origin incomplete, metric 5, localpref 100, valid, internal, all
+      rx pathid: 0x0, tx pathid: 0x1
+R22#
